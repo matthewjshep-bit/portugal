@@ -67,13 +67,16 @@ function todayId() {
 
 function PlaceChip({ place, isActive, isSaved, onFocus, onToggleSave }) {
   const [open, setOpen] = useState(false);
-  const region = REGIONS[place.region];
+  const cat = CATEGORIES[place.cat];
+  const isHome = place.cat === 'stay';
 
   return (
-    <div className={`pt-place${isActive ? ' is-active' : ''}${open ? ' is-open' : ''}`}>
+    <div
+      className={`pt-place${isActive ? ' is-active' : ''}${open ? ' is-open' : ''}${isHome ? ' is-home' : ''}`}
+    >
       <button type="button" className="pt-place__head" onClick={() => { onFocus(place.id); setOpen((v) => !v); }}>
-        <span className="pt-place__dot" style={{ background: region.color }} aria-hidden="true">
-          {CATEGORIES[place.cat].icon}
+        <span className="pt-place__dot" style={{ background: cat.color }} aria-hidden="true">
+          {cat.pin}
         </span>
         <span className="pt-place__name">
           {place.name}
@@ -93,7 +96,11 @@ function PlaceChip({ place, isActive, isSaved, onFocus, onToggleSave }) {
 
       {open && (
         <div className="pt-place__body">
-          {place.tag && <span className="pt-place__tag" style={{ borderColor: region.color, color: region.color }}>{place.tag}</span>}
+          {place.tag && (
+            <span className="pt-place__tag" style={{ borderColor: cat.color, color: cat.color }}>
+              {place.tag}
+            </span>
+          )}
           <p className="pt-place__desc">{place.desc}</p>
           {place.why && (
             <p className="pt-place__why">
@@ -380,9 +387,10 @@ export default function App() {
                   key={key}
                   type="button"
                   className={`pt-filter${cats.has(key) ? ' is-on' : ''}`}
+                  style={{ '--cat': CATEGORIES[key].color }}
                   onClick={() => toggleCat(key)}
                 >
-                  <span aria-hidden="true">{CATEGORIES[key].icon}</span>
+                  <span className="pt-filter__swatch" aria-hidden="true" />
                   {CATEGORIES[key].label}
                 </button>
               ))}

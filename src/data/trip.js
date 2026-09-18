@@ -33,13 +33,13 @@ export const WISHES = {
 };
 
 export const CATEGORIES = {
-  eat: { label: 'Eat', icon: '🍽', pin: 'E' },
-  drink: { label: 'Drink', icon: '🍷', pin: 'D' },
-  do: { label: 'Do', icon: '◎', pin: '◎' },
-  beach: { label: 'Beach', icon: '🌊', pin: '≈' },
-  shop: { label: 'Shop', icon: '◆', pin: '◆' },
-  stay: { label: 'Stay', icon: '⌂', pin: '⌂' },
-  move: { label: 'Travel', icon: '→', pin: '→' },
+  eat: { label: 'Eat', icon: '🍽', pin: 'E', color: '#f97316' },
+  drink: { label: 'Drink', icon: '🍷', pin: 'D', color: '#a855f7' },
+  do: { label: 'Do', icon: '◎', pin: '◎', color: '#38bdf8' },
+  beach: { label: 'Beach', icon: '🌊', pin: '≈', color: '#2dd4bf' },
+  shop: { label: 'Shop', icon: '◆', pin: '◆', color: '#f472b6' },
+  stay: { label: 'Where you sleep', icon: '⌂', pin: '⌂', color: '#fbbf24' },
+  move: { label: 'Travel', icon: '→', pin: '→', color: '#94a3b8' },
 };
 
 /* ------------------------------------------------------------------ */
@@ -430,7 +430,7 @@ export const PLACES = [
 
   {
     id: 'airbnb',
-    name: 'Your Airbnb',
+    name: 'Your Porto Airbnb',
     cat: 'stay',
     region: 'porto',
     area: 'Rua da Torrinha 36 · Cedofeita',
@@ -908,6 +908,19 @@ export const PLACES = [
   },
 
   /* ---------------------------- LISBON --------------------------- */
+  {
+    id: 'lisbonflat',
+    name: 'Your Lisbon Airbnb',
+    cat: 'stay',
+    region: 'lisbon',
+    area: 'Travessa da Conceição da Glória · São José',
+    coords: [38.7175, -9.1450],
+    price: 'Sept 25–27',
+    tag: 'Home for the last two nights',
+    desc: 'A quiet lane running between Rua das Taipas and Rua da Mãe d\'Água, one block above Avenida da Liberdade.',
+    why: 'Very well placed. Avenida da Liberdade is 85 m away — a two-minute walk — and the Ascensor da Glória, the funicular up to Bairro Alto, is 121 m. Red Frog is around the corner on Praça da Alegria. Rossio station, where the Sintra train leaves from, is about seven minutes on foot, which settles how you get to Sintra on the 26th.',
+    booking: 'Walk times from the door: Avenida da Liberdade 2 min, Glória funicular 2, Red Frog 3, São Pedro de Alcântara viewpoint 6 (or ride the funicular), Rossio 7, Príncipe Real 10, Chiado 12, Ramiro 12, Bairro Alto and PARK 14, Time Out Market 20.',
+  },
   {
     id: 'prado',
     name: 'Prado',
@@ -1537,14 +1550,14 @@ export const DAYS = [
       },
       {
         time: '12:30',
-        title: 'Drop bags, eat lightly',
-        body: 'Time Out Market is the zero-effort great lunch — 26 of the city\'s best kitchens under one 1892 roof. Walk-in only: claim a seat before anyone orders.',
-        places: ['timeout'],
+        title: 'Drop bags on Travessa da Conceição da Glória',
+        body: 'The flat is one block off Avenida da Liberdade, which means you are two minutes from the Glória funicular and seven from Rossio. Dump the bags, then eat: Time Out Market is the zero-effort great lunch — 26 of the city\'s best kitchens under one 1892 roof, walk-in only, so claim a seat before anyone orders. It is 20 minutes on foot or six on the metro from Avenida.',
+        places: ['lisbonflat', 'timeout'],
       },
       {
         time: '14:30',
         title: 'Shopping: Príncipe Real',
-        body: 'Embaixada first — a Moorish-revival palace where every room of the old residence is a different Portuguese designer. Then the streets around the garden: concept stores, vintage, independent labels. Gin in the courtyard when you are done.',
+        body: 'Ten minutes uphill from the flat, or ride the Glória funicular two minutes away and walk across. Embaixada first — a Moorish-revival palace where every room of the old residence is a different Portuguese designer. Then the streets around the garden: concept stores, vintage, independent labels. Gin in the courtyard when you are done.',
         places: ['embaixada', 'principereal'],
       },
       {
@@ -1556,7 +1569,7 @@ export const DAYS = [
       {
         time: '18:30',
         title: 'Rooftop',
-        body: 'PARK, on level 6 of a Bairro Alto car park — take the lift, walk up the last flight. Lisbon\'s rooftops fill by 19:30 in September, so this is a 45-minutes-early move, not a spontaneous one. TOPO Chiado, facing the ruined Carmo Convent, is the alternative.',
+        body: 'PARK, on level 6 of a Bairro Alto car park — take the lift, walk up the last flight. Lisbon\'s rooftops fill by 19:30 in September, so this is a 45-minutes-early move, not a spontaneous one. The cheap version is six minutes from your door: ride the Glória funicular up and drink at the São Pedro de Alcântara viewpoint instead. TOPO Chiado, facing the ruined Carmo Convent, is the third option.',
         places: ['parkbar', 'topochiado', 'santacatarina'],
       },
       {
@@ -1579,9 +1592,9 @@ export const DAYS = [
     blocks: [
       {
         time: '08:15',
-        title: 'Get there early',
-        body: '40 minutes by car, or the train from Rossio to Sintra (~40 min, frequent). If you drive, note the 2026 parking restrictions in the historic centre — park below and take the 434 bus up.',
-        places: [],
+        title: 'Walk to Rossio, take the train',
+        body: 'Rossio station is about seven minutes from the flat, and the Sintra line runs from it every 20–30 minutes, roughly 40 minutes each way. Given the 2026 parking restrictions in Sintra\'s historic centre — which push cars out to lots below the town anyway — the train from your doorstep is plainly the better option. From Sintra station take the 434 bus up to Pena.',
+        places: ['lisbonflat'],
       },
       {
         time: '09:30',
@@ -1609,9 +1622,9 @@ export const DAYS = [
       },
       {
         time: '20:00',
-        title: 'Back in Lisbon: pack, then last dinner',
-        body: 'Bags done before you go out. Then whichever of Prado / Ramiro / Boa-Bao you did not do last night, and a cocktail at Red Frog — ring the doorbell, there is no sign. Order the car for 06:15.',
-        places: ['redfrog', 'prado', 'ramiro', 'portasdosol'],
+        title: 'Back to the flat: pack, then last dinner',
+        body: 'Bags done before you go out — you are leaving at 06:15. Then whichever of Prado / Ramiro / Boa-Bao you did not do last night. Finish at Red Frog, which is three minutes from your front door on Praça da Alegria: ring the doorbell, there is no sign. Order the airport car before you go out.',
+        places: ['lisbonflat', 'redfrog', 'prado', 'ramiro'],
       },
     ],
   },
@@ -1627,8 +1640,8 @@ export const DAYS = [
       {
         time: '06:15',
         title: 'Car to LIS',
-        body: '15–20 minutes at that hour. Book it the night before rather than trusting an app at dawn. Non-Schengen departures leave from Terminal 1 — give yourself the full two hours.',
-        places: ['airport'],
+        body: 'About 15 minutes from Travessa da Conceição da Glória at that hour, and roughly €15. Book it the night before rather than trusting an app at dawn. Non-Schengen departures leave from Terminal 1 — give yourself the full two hours.',
+        places: ['lisbonflat', 'airport'],
       },
       {
         time: '07:00',
@@ -1678,6 +1691,12 @@ export const LOGISTICS = [
     icon: '⌂',
     title: 'Your Porto base — Rua da Torrinha 36',
     body: 'Cedofeita, on the ridge above the old town. Walk times from the door: Miguel Bombarda galleries 4 min, Época 5, Palácio de Cristal gardens 6, Livraria Lello 7, Clérigos and Manteigaria 8, the Virtudes sunset terraces 9, São Bento 13, Ribeira 15. Two things follow from that. First, Ribeira is 15 minutes down and a genuine 20 back up — plan the evening so you are not climbing it twice. Second, the far side of your own street is Onze Onze, one of the best natural-wine bars in the city, which makes the nightcap question answer itself.',
+  },
+  {
+    id: 'l-lisbonbase',
+    icon: '⌂',
+    title: 'Your Lisbon base — Travessa da Conceição da Glória',
+    body: 'A quiet lane in São José, one block above Avenida da Liberdade. Walk times: Avenida 2 min, the Glória funicular 2, Red Frog 3, the São Pedro de Alcântara viewpoint 6 on foot or two minutes riding the funicular, Rossio 7, Príncipe Real 10, Chiado 12, Cervejaria Ramiro 12, Bairro Alto and PARK 14, Time Out Market 20. Two consequences: the Sintra train leaves from Rossio, seven minutes away, so take the train and skip Sintra\'s parking rules entirely; and the last-night cocktail is around the corner rather than across town.',
   },
   {
     id: 'l-closed',

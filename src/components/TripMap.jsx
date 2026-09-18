@@ -1,22 +1,30 @@
 import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { REGIONS, CATEGORIES } from '../data/trip';
+import { CATEGORIES } from '../data/trip';
 
 const TILE_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 const TILE_ATTR =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 function markerIcon(place, isActive) {
-  const color = REGIONS[place.region]?.color || '#64748b';
-  const glyph = CATEGORIES[place.cat]?.pin || '•';
+  const cat = CATEGORIES[place.cat];
+  const color = cat?.color || '#64748b';
+  const isHome = place.cat === 'stay';
+  const glyph = cat?.pin || '•';
+  // Homes are the anchors you navigate back to, so they sit above everything
+  // else: bigger, gold, ringed, and never lost in a cluster of dinner pins.
+  const size = isHome ? 40 : isActive ? 38 : 28;
+  const classes = ['trip-marker', isHome && 'is-home', isActive && 'is-active']
+    .filter(Boolean)
+    .join(' ');
   return L.divIcon({
     className: 'trip-marker-wrap',
-    html: `<span class="trip-marker${isActive ? ' is-active' : ''}" style="--pin:${color}">
+    html: `<span class="${classes}" style="--pin:${color}">
              <span class="trip-marker__glyph">${glyph}</span>
            </span>`,
-    iconSize: isActive ? [38, 38] : [28, 28],
-    iconAnchor: isActive ? [19, 19] : [14, 14],
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
   });
 }
 
@@ -101,10 +109,11 @@ export default function TripMap({ places, activeId, focusId, onSelect, showRoute
         icon: markerIcon(place, place.id === activeId),
         title: place.name,
         riseOnHover: true,
+        zIndexOffset: place.cat === 'stay' ? 1000 : 0,
       });
       marker.bindPopup(
         `<div class="trip-popup">
-           <span class="trip-popup__cat" style="--pin:${REGIONS[place.region]?.color}">${
+           <span class="trip-popup__cat" style="--pin:${CATEGORIES[place.cat]?.color}">${
              CATEGORIES[place.cat]?.label || ''
            }${place.tag ? ` · ${place.tag}` : ''}</span>
            <strong>${place.name}</strong>

@@ -668,3 +668,34 @@ img { max-width: 100%; }
   border-color: var(--sand);
   background: rgba(233, 192, 138, 0.14);
 }
+
+/* ------------------------------------------- pins by category, homes first */
+
+.trip-marker.is-home {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+  border-color: #fffdf7;
+  box-shadow: 0 0 0 2px rgba(20, 14, 2, 0.55), 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+.trip-marker.is-home .trip-marker__glyph { font-size: 1.15rem; }
+.trip-marker.is-home.is-active {
+  box-shadow: 0 0 0 5px rgba(251, 191, 36, 0.45), 0 6px 18px rgba(0, 0, 0, 0.55);
+}
+
+/* the filter row doubles as the map legend */
+.pt-filter__swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cat, var(--txt-3));
+  flex: 0 0 auto;
+}
+
+/* a base you come back to, not another dinner reservation */
+.pt-place.is-home {
+  border-color: rgba(251, 191, 36, 0.45);
+  background: linear-gradient(120deg, rgba(251, 191, 36, 0.09), transparent 62%), var(--panel);
+}
+.pt-place.is-home .pt-place__name { color: #fbd77a; }
+.pt-place.is-home .pt-place__dot { color: #2a1c02; }
