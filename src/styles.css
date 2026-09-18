@@ -146,8 +146,7 @@ img { max-width: 100%; }
   position: sticky;
   top: 0;
   z-index: 30;
-  background: rgba(8, 10, 16, 0.92);
-  backdrop-filter: blur(14px);
+  background: var(--ink);
   border-bottom: 1px solid var(--line);
 }
 .pt-rail__track {
@@ -647,3 +646,25 @@ img { max-width: 100%; }
   color: var(--txt-2);
 }
 .pt-scope button:disabled { opacity: 0.3; cursor: default; }
+
+/* -------------------------------------------- whose-pick badges */
+
+.pt-place__wish {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--wish);
+  border: 1px solid color-mix(in srgb, var(--wish) 45%, transparent);
+  background: color-mix(in srgb, var(--wish) 12%, transparent);
+  border-radius: 99px;
+  padding: 1px 7px;
+  white-space: nowrap;
+}
+
+.pt-filter--wish { order: -1; }
+.pt-filter--wish.is-on {
+  color: var(--sand);
+  border-color: var(--sand);
+  background: rgba(233, 192, 138, 0.14);
+}

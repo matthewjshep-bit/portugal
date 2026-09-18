@@ -6,6 +6,7 @@ import {
   PLACES,
   REGIONS,
   CATEGORIES,
+  WISHES,
   BOOKINGS,
   LOGISTICS,
   SOURCES,
@@ -76,6 +77,15 @@ function PlaceChip({ place, isActive, isSaved, onFocus, onToggleSave }) {
         </span>
         <span className="pt-place__name">
           {place.name}
+          {place.wish && (
+            <span
+              className="pt-place__wish"
+              style={{ '--wish': WISHES[place.wish].color }}
+              title={`On ${WISHES[place.wish].label}'s list`}
+            >
+              {WISHES[place.wish].label}
+            </span>
+          )}
           {place.mustBook && <span className="pt-place__flag" title="Reservation needed">book</span>}
         </span>
         <span className="pt-place__meta">{place.price}</span>
@@ -116,6 +126,7 @@ export default function App() {
   const [dayId, setDayId] = useState(() => todayId() || DAYS[0].id);
   const [scope, setScope] = useState('day');
   const [cats, setCats] = useState(() => new Set(CAT_KEYS));
+  const [wishOnly, setWishOnly] = useState(false);
   const [activeId, setActiveId] = useState(null);
   const [focus, setFocus] = useState({ id: null, n: 0 });
   const [store, setStore] = useState(readStore);
@@ -166,8 +177,11 @@ export default function App() {
     if (effectiveScope === 'day') pool = dayIds.map((id) => PLACE_BY_ID[id]);
     else if (effectiveScope === 'region') pool = regionPlaces;
     else pool = PLACES;
-    return pool.filter(Boolean).filter((p) => cats.has(p.cat));
-  }, [effectiveScope, dayIds, regionPlaces, cats]);
+    return pool
+      .filter(Boolean)
+      .filter((p) => cats.has(p.cat))
+      .filter((p) => !wishOnly || p.wish);
+  }, [effectiveScope, dayIds, regionPlaces, cats, wishOnly]);
 
   const focusPlace = (id) => {
     setActiveId(id);
@@ -229,6 +243,7 @@ export default function App() {
           <div className="pt-hero__stats">
             <div><strong>{PLACES.length}</strong><span>places researched</span></div>
             <div><strong>{BOOKINGS.filter((b) => b.urgency === 'now').length}</strong><span>to book today</span></div>
+            <div><strong>{PLACES.filter((p) => p.wish).length}</strong><span>from your own two lists</span></div>
             <div><strong>{TRIP.stay}</strong><span>Comporta base, 3 nights</span></div>
           </div>
         </div>
@@ -351,6 +366,15 @@ export default function App() {
             />
 
             <div className="pt-filters">
+              <button
+                type="button"
+                className={`pt-filter pt-filter--wish${wishOnly ? ' is-on' : ''}`}
+                onClick={() => setWishOnly((v) => !v)}
+                title="Only the places you two picked out"
+              >
+                <span aria-hidden="true">★</span>
+                Your picks
+              </button>
               {CAT_KEYS.map((key) => (
                 <button
                   key={key}
